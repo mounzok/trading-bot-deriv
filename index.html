@@ -1,0 +1,1590 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Trading Bot - Deriv API</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --primary: #1a73e8;
+            --secondary: #4285f4;
+            --dark: #202124;
+            --light: #f8f9fa;
+            --success: #34a853;
+            --danger: #ea4335;
+            --warning: #fbbc04;
+            --info: #4285f4;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            background-color: #f5f7fa;
+            color: #333;
+            line-height: 1.6;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        
+        header {
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            color: white;
+            padding: 1.5rem 0;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        
+        .header-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .logo {
+            font-size: 1.8rem;
+            font-weight: 700;
+            display: flex;
+            align-items: center;
+        }
+        
+        .logo i {
+            margin-right: 10px;
+            color: var(--warning);
+        }
+        
+        .user-info {
+            display: flex;
+            align-items: center;
+        }
+        
+        .user-avatar {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background-color: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-right: 10px;
+            color: var(--primary);
+            font-weight: bold;
+        }
+        
+        .nav {
+            background-color: white;
+            padding: 1rem 0;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+        }
+        
+        .nav-links {
+            display: flex;
+            list-style: none;
+        }
+        
+        .nav-links li {
+            margin-right: 20px;
+        }
+        
+        .nav-links a {
+            text-decoration: none;
+            color: var(--dark);
+            font-weight: 500;
+            padding: 8px 15px;
+            border-radius: 4px;
+            transition: all 0.3s;
+        }
+        
+        .nav-links a:hover, .nav-links a.active {
+            background-color: var(--primary);
+            color: white;
+        }
+        
+        .main-content {
+            padding: 2rem 0;
+        }
+        
+        .card {
+            background: white;
+            border-radius: 8px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+            padding: 1.5rem;
+            margin-bottom: 2rem;
+        }
+        
+        .card-header {
+            border-bottom: 1px solid #eee;
+            padding-bottom: 1rem;
+            margin-bottom: 1.5rem;
+        }
+        
+        .card-title {
+            font-size: 1.5rem;
+            font-weight: 600;
+            color: var(--dark);
+        }
+        
+        .card-body {
+            color: #555;
+        }
+        
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+        
+        .form-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: 500;
+        }
+        
+        .form-control {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            font-size: 1rem;
+        }
+        
+        .btn {
+            display: inline-block;
+            padding: 12px 24px;
+            background-color: var(--primary);
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 1rem;
+            font-weight: 500;
+            transition: all 0.3s;
+            text-decoration: none;
+        }
+        
+        .btn:hover {
+            background-color: var(--secondary);
+        }
+        
+        .btn-success {
+            background-color: var(--success);
+        }
+        
+        .btn-success:hover {
+            background-color: #2d9249;
+        }
+        
+        .btn-danger {
+            background-color: var(--danger);
+        }
+        
+        .btn-danger:hover {
+            background-color: #d33b2c;
+        }
+        
+        .btn-warning {
+            background-color: var(--warning);
+            color: var(--dark);
+        }
+        
+        .btn-warning:hover {
+            background-color: #e0a800;
+        }
+        
+        .btn-info {
+            background-color: var(--info);
+        }
+        
+        .btn-info:hover {
+            background-color: #3b78e7;
+        }
+        
+        .bot-container {
+            background-color: #f8f9fa;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            padding: 1.5rem;
+            min-height: 400px;
+        }
+        
+        .bot-status {
+            display: flex;
+            align-items: center;
+            margin-bottom: 1rem;
+        }
+        
+        .status-indicator {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            margin-right: 10px;
+        }
+        
+        .status-running {
+            background-color: var(--success);
+            box-shadow: 0 0 5px var(--success);
+        }
+        
+        .status-stopped {
+            background-color: var(--danger);
+        }
+        
+        .tabs {
+            display: flex;
+            border-bottom: 1px solid #ddd;
+            margin-bottom: 1.5rem;
+        }
+        
+        .tab {
+            padding: 12px 20px;
+            cursor: pointer;
+            border-bottom: 2px solid transparent;
+            font-weight: 500;
+        }
+        
+        .tab.active {
+            border-bottom: 2px solid var(--primary);
+            color: var(--primary);
+        }
+        
+        .tab-content {
+            display: none;
+        }
+        
+        .tab-content.active {
+            display: block;
+        }
+        
+        .api-info {
+            background-color: #e8f0fe;
+            border-left: 4px solid var(--primary);
+            padding: 1rem;
+            margin-bottom: 1.5rem;
+        }
+        
+        .api-info h3 {
+            margin-top: 0;
+            color: var(--primary);
+        }
+        
+        .api-info p {
+            margin-bottom: 0.5rem;
+        }
+        
+        .api-key {
+            font-family: monospace;
+            background-color: #f1f3f4;
+            padding: 5px 10px;
+            border-radius: 4px;
+            display: inline-block;
+        }
+        
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            gap: 1.5rem;
+            margin-bottom: 2rem;
+        }
+        
+        .stat-card {
+            background: white;
+            border-radius: 8px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+            padding: 1.5rem;
+            text-align: center;
+        }
+        
+        .stat-value {
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: var(--primary);
+            margin: 0.5rem 0;
+        }
+        
+        .stat-label {
+            color: #666;
+            font-size: 0.9rem;
+        }
+        
+        .hidden {
+            display: none;
+        }
+        
+        .notification {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            padding: 15px 20px;
+            border-radius: 4px;
+            color: white;
+            font-weight: 500;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+            z-index: 1000;
+            transform: translateX(150%);
+            transition: transform 0.3s ease-out;
+        }
+        
+        .notification.show {
+            transform: translateX(0);
+        }
+        
+        .notification.success {
+            background-color: var(--success);
+        }
+        
+        .notification.error {
+            background-color: var(--danger);
+        }
+        
+        .notification.warning {
+            background-color: var(--warning);
+            color: var(--dark);
+        }
+        
+        .notification.info {
+            background-color: var(--info);
+        }
+        
+        footer {
+            background-color: var(--dark);
+            color: white;
+            padding: 2rem 0;
+            margin-top: 3rem;
+        }
+        
+        .footer-content {
+            display: flex;
+            justify-content: space-between;
+            flex-wrap: wrap;
+        }
+        
+        .footer-section {
+            flex: 1;
+            min-width: 250px;
+            margin-bottom: 1.5rem;
+        }
+        
+        .footer-section h3 {
+            margin-bottom: 1rem;
+            font-size: 1.2rem;
+        }
+        
+        .footer-links {
+            list-style: none;
+        }
+        
+        .footer-links li {
+            margin-bottom: 0.5rem;
+        }
+        
+        .footer-links a {
+            color: #ddd;
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+        
+        .footer-links a:hover {
+            color: white;
+        }
+        
+        .copyright {
+            text-align: center;
+            padding-top: 1.5rem;
+            margin-top: 1.5rem;
+            border-top: 1px solid #444;
+            font-size: 0.9rem;
+            color: #aaa;
+        }
+        
+        .market-timer {
+            background-color: #fff8e1;
+            border-left: 4px solid var(--warning);
+            padding: 1rem;
+            margin-bottom: 1.5rem;
+            border-radius: 4px;
+        }
+        
+        .market-timer h4 {
+            margin-top: 0;
+            color: var(--warning);
+        }
+        
+        .progress {
+            height: 10px;
+            background-color: #e0e0e0;
+            border-radius: 5px;
+            overflow: hidden;
+            margin-top: 0.5rem;
+        }
+        
+        .progress-bar {
+            height: 100%;
+            background-color: var(--warning);
+            width: 0%;
+            transition: width 1s linear;
+        }
+        
+        .current-market {
+            display: flex;
+            align-items: center;
+            background-color: #e8f5e9;
+            padding: 0.75rem 1rem;
+            border-radius: 4px;
+            margin-bottom: 1rem;
+        }
+        
+        .current-market i {
+            color: var(--success);
+            margin-right: 10px;
+            font-size: 1.2rem;
+        }
+        
+        .market-info {
+            flex: 1;
+        }
+        
+        .market-name {
+            font-weight: 600;
+            color: var(--dark);
+        }
+        
+        .market-time {
+            font-size: 0.85rem;
+            color: #666;
+        }
+        
+        .checkbox-group {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin-top: 0.5rem;
+        }
+        
+        .checkbox-item {
+            display: flex;
+            align-items: center;
+            background-color: #f1f3f4;
+            padding: 8px 12px;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: background-color 0.2s;
+        }
+        
+        .checkbox-item:hover {
+            background-color: #e8eaed;
+        }
+        
+        .checkbox-item input {
+            margin-right: 8px;
+        }
+        
+        .login-container {
+            max-width: 400px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 8px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+            padding: 2rem;
+        }
+        
+        .login-header {
+            text-align: center;
+            margin-bottom: 2rem;
+        }
+        
+        .login-header h2 {
+            color: var(--primary);
+            margin-bottom: 0.5rem;
+        }
+        
+        .login-header p {
+            color: #666;
+        }
+        
+        .login-logo {
+            width: 80px;
+            height: 80px;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 1.5rem;
+            color: white;
+            font-size: 2rem;
+        }
+        
+        .forgot-password {
+            text-align: right;
+            margin-top: 1rem;
+        }
+        
+        .forgot-password a {
+            color: var(--primary);
+            text-decoration: none;
+            font-size: 0.9rem;
+        }
+        
+        .forgot-password a:hover {
+            text-decoration: underline;
+        }
+        
+        .divider {
+            display: flex;
+            align-items: center;
+            margin: 1.5rem 0;
+        }
+        
+        .divider::before,
+        .divider::after {
+            content: '';
+            flex: 1;
+            height: 1px;
+            background-color: #ddd;
+        }
+        
+        .divider span {
+            padding: 0 1rem;
+            color: #666;
+            font-size: 0.9rem;
+        }
+        
+        .signup-link {
+            text-align: center;
+            margin-top: 1.5rem;
+            color: #666;
+        }
+        
+        .signup-link a {
+            color: var(--primary);
+            text-decoration: none;
+            font-weight: 500;
+        }
+        
+        .signup-link a:hover {
+            text-decoration: underline;
+        }
+        
+        .risk-management {
+            background-color: #f1f8e9;
+            border-left: 4px solid var(--success);
+            padding: 1rem;
+            margin-bottom: 1.5rem;
+            border-radius: 4px;
+        }
+        
+        .risk-management h4 {
+            margin-top: 0;
+            color: var(--success);
+        }
+        
+        .risk-management-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1rem;
+            margin-top: 1rem;
+        }
+        
+        .risk-item {
+            background-color: white;
+            border-radius: 4px;
+            padding: 1rem;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+        }
+        
+        .risk-item h5 {
+            margin-top: 0;
+            color: var(--dark);
+            display: flex;
+            align-items: center;
+        }
+        
+        .risk-item h5 i {
+            margin-right: 8px;
+        }
+        
+        .risk-item p {
+            margin-bottom: 0;
+            color: #666;
+            font-size: 0.9rem;
+        }
+        
+        .take-profit {
+            border-left: 3px solid var(--success);
+        }
+        
+        .stop-loss {
+            border-left: 3px solid var(--danger);
+        }
+        
+        .api-terminal {
+            background-color: #263238;
+            color: #eeffff;
+            border-radius: 8px;
+            padding: 1rem;
+            font-family: 'Courier New', monospace;
+            font-size: 0.9rem;
+            max-height: 300px;
+            overflow-y: auto;
+            margin-top: 1rem;
+        }
+        
+        .api-terminal .line {
+            margin-bottom: 0.5rem;
+        }
+        
+        .api-terminal .request {
+            color: #c3e88d;
+        }
+        
+        .api-terminal .response {
+            color: #82aaff;
+        }
+        
+        .api-terminal .error {
+            color: #f07178;
+        }
+        
+        .api-terminal .success {
+            color: #c3e88d;
+        }
+        
+        .github-section {
+            background-color: #f6f8fa;
+            border-radius: 8px;
+            padding: 1.5rem;
+            margin-top: 1.5rem;
+        }
+        
+        .github-section h4 {
+            margin-top: 0;
+            color: var(--dark);
+            display: flex;
+            align-items: center;
+        }
+        
+        .github-section h4 i {
+            margin-right: 10px;
+            color: #333;
+        }
+        
+        .github-section p {
+            margin-bottom: 1rem;
+        }
+        
+        .github-link {
+            display: inline-flex;
+            align-items: center;
+            background-color: #24292e;
+            color: white;
+            padding: 8px 16px;
+            border-radius: 4px;
+            text-decoration: none;
+            font-weight: 500;
+            transition: background-color 0.2s;
+        }
+        
+        .github-link:hover {
+            background-color: #1b1f23;
+        }
+        
+        .github-link i {
+            margin-right: 8px;
+        }
+        
+        @media (max-width: 768px) {
+            .header-content {
+                flex-direction: column;
+                text-align: center;
+            }
+            
+            .nav-links {
+                flex-direction: column;
+                margin-top: 1rem;
+            }
+            
+            .nav-links li {
+                margin: 0 0 10px 0;
+            }
+            
+            .stats-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .risk-management-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container">
+            <div class="header-content">
+                <div class="logo">
+                    <i class="fas fa-robot"></i>
+                    <span>TradingBot Pro</span>
+                </div>
+                <div class="user-info">
+                    <div class="user-avatar" id="userAvatar">JD</div>
+                    <div id="userInfo">
+                        <div id="userName">John Doe</div>
+                        <div id="userStatus">Non connecté</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+    
+    <nav class="nav">
+        <div class="container">
+            <ul class="nav-links">
+                <li><a href="#" class="active">Tableau de bord</a></li>
+                <li><a href="#">Bot de Trading</a></li>
+                <li><a href="#">API Deriv</a></li>
+                <li><a href="#">Statistiques</a></li>
+                <li><a href="#">Paramètres</a></li>
+            </ul>
+        </div>
+    </nav>
+    
+    <main class="main-content">
+        <div class="container">
+            <div class="stats-grid">
+                <div class="stat-card">
+                    <div class="stat-label">Trades aujourd'hui</div>
+                    <div class="stat-value">24</div>
+                    <div class="stat-label">+12% vs hier</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-label">Taux de réussite</div>
+                    <div class="stat-value">68%</div>
+                    <div class="stat-label">+3% vs hier</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-label">Profit/Perte</div>
+                    <div class="stat-value">+$124.50</div>
+                    <div class="stat-label">+$45.20 aujourd'hui</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-label">Solde du compte</div>
+                    <div class="stat-value">$1,245.75</div>
+                    <div class="stat-label">+$89.30 cette semaine</div>
+                </div>
+            </div>
+            
+            <div class="card">
+                <div class="card-header">
+                    <h2 class="card-title">Bot de Trading</h2>
+                </div>
+                <div class="card-body">
+                    <div class="bot-status">
+                        <div class="status-indicator status-stopped"></div>
+                        <span id="botStatusText">Arrêté</span>
+                    </div>
+                    
+                    <div class="current-market hidden" id="currentMarketInfo">
+                        <i class="fas fa-chart-line"></i>
+                        <div class="market-info">
+                            <div class="market-name" id="currentMarketName">1HZ10V</div>
+                            <div class="market-time" id="currentMarketTime">Marché actif depuis 2 min 30 sec</div>
+                        </div>
+                    </div>
+                    
+                    <div class="market-timer hidden" id="marketTimer">
+                        <h4>Changement de marché imminent</h4>
+                        <p>Aucun signal détecté depuis <span id="timeWithoutSignal">0</span> minutes. Changement de marché dans <span id="timeUntilChange">5</span> minutes.</p>
+                        <div class="progress">
+                            <div class="progress-bar" id="progressBar"></div>
+                        </div>
+                    </div>
+                    
+                    <div class="tabs">
+                        <div class="tab active">Configuration</div>
+                        <div class="tab">Indicateurs</div>
+                        <div class="tab">Stratégie</div>
+                        <div class="tab">Gestion des Risques</div>
+                        <div class="tab">API Terminal</div>
+                        <div class="tab">Journal</div>
+                    </div>
+                    
+                    <div class="tab-content active">
+                        <div class="bot-container">
+                            <h3>Configuration du Bot</h3>
+                            <p>Ce bot utilise une stratégie multi-indicateurs avec EMA, MACD, RSI et Bollinger Bands.</p>
+                            
+                            <div class="form-group">
+                                <label>Marchés disponibles</label>
+                                <div class="checkbox-group">
+                                    <div class="checkbox-item">
+                                        <input type="checkbox" id="market1" value="1HZ10V" checked>
+                                        <label for="market1">1HZ10V (Volatility 10)</label>
+                                    </div>
+                                    <div class="checkbox-item">
+                                        <input type="checkbox" id="market2" value="1HZ25V">
+                                        <label for="market2">1HZ25V (Volatility 25)</label>
+                                    </div>
+                                    <div class="checkbox-item">
+                                        <input type="checkbox" id="market3" value="1HZ50V">
+                                        <label for="market3">1HZ50V (Volatility 50)</label>
+                                    </div>
+                                    <div class="checkbox-item">
+                                        <input type="checkbox" id="market4" value="1HZ75V">
+                                        <label for="market4">1HZ75V (Volatility 75)</label>
+                                    </div>
+                                    <div class="checkbox-item">
+                                        <input type="checkbox" id="market5" value="1HZ100V">
+                                        <label for="market5">1HZ100V (Volatility 100)</label>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="form-group">
+                                <label>Durée du trade (minutes)</label>
+                                <input type="number" class="form-control" id="tradeDuration" value="1" min="1" max="60">
+                            </div>
+                            
+                            <div class="form-group">
+                                <label>Temps avant changement de marché (minutes)</label>
+                                <input type="number" class="form-control" id="marketChangeTime" value="5" min="1" max="60">
+                            </div>
+                            
+                            <div class="form-group">
+                                <label>Montant par trade ($)</label>
+                                <input type="number" class="form-control" id="tradeAmount" value="0.35" min="0.1" step="0.05">
+                            </div>
+                            
+                            <div class="form-group">
+                                <label>Intervalle de bougie</label>
+                                <select class="form-control">
+                                    <option>1 minute</option>
+                                    <option>5 minutes</option>
+                                    <option>15 minutes</option>
+                                    <option selected>1 heure</option>
+                                    <option>4 heures</option>
+                                </select>
+                            </div>
+                            
+                            <div style="margin-top: 2rem;">
+                                <button class="btn btn-success" id="startBotBtn">
+                                    <i class="fas fa-play"></i> Démarrer le Bot
+                                </button>
+                                <button class="btn btn-danger" id="stopBotBtn" style="display: none;">
+                                    <i class="fas fa-stop"></i> Arrêter le Bot
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="tab-content">
+                        <div class="bot-container">
+                            <h3>Indicateurs Utilisés</h3>
+                            <ul>
+                                <li><strong>EMA20:</strong> Exponential Moving Average (période 20)</li>
+                                <li><strong>EMA50:</strong> Exponential Moving Average (période 50)</li>
+                                <li><strong>MACD:</strong> Moving Average Convergence Divergence (12, 26, 9)</li>
+                                <li><strong>RSI:</strong> Relative Strength Index (période 14)</li>
+                                <li><strong>Bollinger Bands:</strong> (période 20, écart-type 2)</li>
+                            </ul>
+                        </div>
+                    </div>
+                    
+                    <div class="tab-content">
+                        <div class="bot-container">
+                            <h3>Stratégie de Trading</h3>
+                            <h4>Signal d'Achat (CALL):</h4>
+                            <ul>
+                                <li>RSI < 30 (condition de survente)</li>
+                                <li>EMA20 > EMA50 (tendance haussière)</li>
+                                <li>RSI > 30 (sortie de survente)</li>
+                                <li>Bande de Bollinger (close) > Bande de Bollinger (open)</li>
+                                <li>MACD > Signal (momentum haussier)</li>
+                            </ul>
+                            
+                            <h4>Signal de Vente (PUT):</h4>
+                            <ul>
+                                <li>EMA20 < EMA50 (tendance baissière)</li>
+                                <li>RSI < 30 (condition de survente)</li>
+                                <li>Bande de Bollinger (close) < Bande de Bollinger (open)</li>
+                                <li>MACD < Signal (momentum baissier)</li>
+                            </ul>
+                            
+                            <h4>Changement de marché automatique:</h4>
+                            <p>Si aucun signal n'est détecté pendant 5 minutes, le bot change automatiquement de marché pour trouver de meilleures opportunités de trading.</p>
+                        </div>
+                    </div>
+                    
+                    <div class="tab-content">
+                        <div class="bot-container">
+                            <h3>Gestion des Risques</h3>
+                            <div class="risk-management">
+                                <h4>Paramètres de Gestion des Risques</h4>
+                                <p>Configurez vos niveaux de Take Profit et Stop Loss pour protéger votre capital et maximiser vos gains.</p>
+                                
+                                <div class="risk-management-grid">
+                                    <div class="risk-item take-profit">
+                                        <h5><i class="fas fa-arrow-up text-success"></i> Take Profit</h5>
+                                        <div class="form-group">
+                                            <label>Profit cible ($)</label>
+                                            <input type="number" class="form-control" id="takeProfit" value="5" min="0.1" step="0.1">
+                                        </div>
+                                        <p>Le trade se clôturera automatiquement lorsque ce profit sera atteint.</p>
+                                    </div>
+                                    
+                                    <div class="risk-item stop-loss">
+                                        <h5><i class="fas fa-arrow-down text-danger"></i> Stop Loss</h5>
+                                        <div class="form-group">
+                                            <label>Perte maximale ($)</label>
+                                            <input type="number" class="form-control" id="stopLoss" value="1" min="0.1" step="0.1">
+                                        </div>
+                                        <p>Le trade se clôturera automatiquement lorsque cette perte sera atteinte.</p>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div style="margin-top: 1.5rem;">
+                                <h4>Comment ça fonctionne ?</h4>
+                                <p>Chaque trade ouvert par le bot sera automatiquement clôturé lorsque l'un de ces seuils sera atteint :</p>
+                                <ul>
+                                    <li><strong>Take Profit:</strong> Lorsque le profit atteint 5 USD, le trade est clôturé avec un gain.</li>
+                                    <li><strong>Stop Loss:</strong> Lorsque la perte atteint 1 USD, le trade est clôturé pour limiter les pertes.</li>
+                                </ul>
+                                <p>Cette gestion des risques permet de protéger votre capital et de sécuriser vos gains automatiquement.</p>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="tab-content">
+                        <div class="bot-container">
+                            <h3>API Terminal</h3>
+                            <p>Ce terminal affiche les communications avec l'API Deriv en temps réel.</p>
+                            
+                            <div class="api-terminal" id="apiTerminal">
+                                <div class="line">En attente de connexion à l'API Deriv...</div>
+                            </div>
+                            
+                            <div style="margin-top: 1rem;">
+                                <button class="btn btn-info" id="testApiBtn">Tester la connexion API</button>
+                                <button class="btn btn-warning" id="clearTerminalBtn">Effacer le terminal</button>
+                            </div>
+                            
+                            <div class="github-section">
+                                <h4><i class="fab fa-github"></i> Intégration GitHub</h4>
+                                <p>Ce projet utilise l'API Deriv avec une intégration locale via GitHub pour le développement et le déploiement.</p>
+                                <a href="https://github.com/deriv-com/API" target="_blank" class="github-link">
+                                    <i class="fab fa-github"></i> Voir la documentation API
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="tab-content">
+                        <div class="bot-container">
+                            <h3>Journal de Trading</h3>
+                            <div style="max-height: 300px; overflow-y: auto;">
+                                <table style="width: 100%; border-collapse: collapse;">
+                                    <thead>
+                                        <tr style="background-color: #f1f3f4;">
+                                            <th style="padding: 8px; text-align: left;">Heure</th>
+                                            <th style="padding: 8px; text-align: left;">Actif</th>
+                                            <th style="padding: 8px; text-align: left;">Type</th>
+                                            <th style="padding: 8px; text-align: left;">Durée</th>
+                                            <th style="padding: 8px; text-align: left;">Montant</th>
+                                            <th style="padding: 8px; text-align: left;">TP</th>
+                                            <th style="padding: 8px; text-align: left;">SL</th>
+                                            <th style="padding: 8px; text-align: left;">Résultat</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td style="padding: 8px;">14:32:15</td>
+                                            <td style="padding: 8px;">1HZ10V</td>
+                                            <td style="padding: 8px;">CALL</td>
+                                            <td style="padding: 8px;">1 min</td>
+                                            <td style="padding: 8px;">$0.35</td>
+                                            <td style="padding: 8px; color: var(--success);">$5.00</td>
+                                            <td style="padding: 8px; color: var(--danger);">$1.00</td>
+                                            <td style="padding: 8px; color: var(--success);">+$0.30</td>
+                                        </tr>
+                                        <tr>
+                                            <td style="padding: 8px;">14:28:42</td>
+                                            <td style="padding: 8px;">1HZ10V</td>
+                                            <td style="padding: 8px;">PUT</td>
+                                            <td style="padding: 8px;">1 min</td>
+                                            <td style="padding: 8px;">$0.35</td>
+                                            <td style="padding: 8px; color: var(--success);">$5.00</td>
+                                            <td style="padding: 8px; color: var(--danger);">$1.00</td>
+                                            <td style="padding: 8px; color: var(--danger);">-$0.35</td>
+                                        </tr>
+                                        <tr>
+                                            <td style="padding: 8px;">14:25:18</td>
+                                            <td style="padding: 8px;">1HZ10V</td>
+                                            <td style="padding: 8px;">CALL</td>
+                                            <td style="padding: 8px;">1 min</td>
+                                            <td style="padding: 8px;">$0.35</td>
+                                            <td style="padding: 8px; color: var(--success);">$5.00</td>
+                                            <td style="padding: 8px; color: var(--danger);">$1.00</td>
+                                            <td style="padding: 8px; color: var(--success);">+$0.30</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="card">
+                <div class="card-header">
+                    <h2 class="card-title">API Deriv</h2>
+                </div>
+                <div class="card-body">
+                    <div id="loginSection" class="hidden">
+                        <div class="login-container">
+                            <div class="login-header">
+                                <div class="login-logo">
+                                    <i class="fas fa-chart-line"></i>
+                                </div>
+                                <h2>Connexion à l'API Deriv</h2>
+                                <p>Connectez-vous avec votre App ID et Token API</p>
+                            </div>
+                            
+                            <div class="form-group">
+                                <label>App ID</label>
+                                <input type="text" class="form-control" id="appId" placeholder="1089" value="1089">
+                                <small style="color: #666; font-size: 0.85rem;">Utilisez 1089 pour l'application de test</small>
+                            </div>
+                            
+                            <div class="form-group">
+                                <label>Token API</label>
+                                <input type="password" class="form-control" id="apiToken" placeholder="votre_token_api">
+                                <small style="color: #666; font-size: 0.85rem;">Obtenez votre token depuis <a href="https://app.deriv.com/account/api-token" target="_blank">votre compte Deriv</a></small>
+                            </div>
+                            
+                            <button class="btn btn-success" id="loginBtn" style="width: 100%; margin-top: 1rem;">Se connecter</button>
+                            
+                            <div class="divider">
+                                <span>ou</span>
+                            </div>
+                            
+                            <div class="signup-link">
+                                Vous n'avez pas de compte? <a href="https://app.deriv.com/signup" target="_blank">Créer un compte</a>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div id="apiSection">
+                        <div class="api-info">
+                            <h3>Informations API</h3>
+                            <p><strong>Statut:</strong> <span id="apiStatus">Connecté</span></p>
+                            <p><strong>App ID:</strong> <span id="appIdDisplay">1089</span></p>
+                            <p><strong>Compte:</strong> <span id="apiAccount">demo@deriv.com</span></p>
+                            <p><strong>Type de compte:</strong> <span id="apiAccountType">Demo</span></p>
+                            <p><strong>Permissions:</span> <span id="apiPermissions">Trade, Read</span></p>
+                        </div>
+                        
+                        <div style="margin-top: 1.5rem;">
+                            <button class="btn btn-warning" id="refreshTokenBtn">Rafraîchir la session</button>
+                            <button class="btn btn-danger" id="logoutBtn">Déconnexion</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+    
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>TradingBot Pro</h3>
+                    <p>Une solution de trading automatisée pour les indices de volatilité Deriv.</p>
+                </div>
+                <div class="footer-section">
+                    <h3>Liens rapides</h3>
+                    <ul class="footer-links">
+                        <li><a href="#">Documentation</a></li>
+                        <li><a href="#">API Reference</a></li>
+                        <li><a href="#">Support</a></li>
+                        <li><a href="#">Conditions d'utilisation</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h3>Contact</h3>
+                    <ul class="footer-links">
+                        <li><a href="#">contact@tradingbotpro.com</a></li>
+                        <li><a href="#">+33 1 23 45 67 89</a></li>
+                        <li><a href="#">Paris, France</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="copyright">
+                &copy; 2023 TradingBot Pro. Tous droits réservés. Ce site n'est pas affilié à Deriv.
+            </div>
+        </div>
+    </footer>
+    
+    <div class="notification" id="notification"></div>
+    
+    <script>
+        // API Deriv WebSocket
+        let ws = null;
+        let appId = '1089';
+        let token = '';
+        
+        // Gestion des onglets
+        document.querySelectorAll('.tab').forEach(tab => {
+            tab.addEventListener('click', () => {
+                // Supprimer la classe active de tous les onglets
+                document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+                document.querySelectorAll('.tab-content').forEach(c => c.classList.remove('active'));
+                
+                // Ajouter la classe active à l'onglet cliqué
+                tab.classList.add('active');
+                
+                // Afficher le contenu correspondant
+                const tabContent = document.querySelectorAll('.tab-content')[Array.from(document.querySelectorAll('.tab')).indexOf(tab)];
+                tabContent.classList.add('active');
+            });
+        });
+        
+        // Variables globales pour le bot
+        let botRunning = false;
+        let marketChangeInterval;
+        let marketTimerInterval;
+        let currentMarketIndex = 0;
+        let selectedMarkets = ['1HZ10V'];
+        let timeWithoutSignal = 0;
+        let marketChangeTime = 5; // minutes
+        let tradeDuration = 1; // minutes
+        let tradeAmount = 0.35; // USD
+        let takeProfit = 5; // USD
+        let stopLoss = 1; // USD
+        let marketStartTime;
+        
+        // Gestion du bot
+        const startBotBtn = document.getElementById('startBotBtn');
+        const stopBotBtn = document.getElementById('stopBotBtn');
+        const botStatusText = document.getElementById('botStatusText');
+        const statusIndicator = document.querySelector('.status-indicator');
+        const currentMarketInfo = document.getElementById('currentMarketInfo');
+        const currentMarketName = document.getElementById('currentMarketName');
+        const currentMarketTime = document.getElementById('currentMarketTime');
+        const marketTimer = document.getElementById('marketTimer');
+        const timeWithoutSignalEl = document.getElementById('timeWithoutSignal');
+        const timeUntilChangeEl = document.getElementById('timeUntilChange');
+        const progressBar = document.getElementById('progressBar');
+        
+        startBotBtn.addEventListener('click', () => {
+            // Vérifier si l'utilisateur est connecté à l'API
+            if (!ws || ws.readyState !== WebSocket.OPEN) {
+                showNotification('Veuillez vous connecter à l\'API Deriv d\'abord', 'error');
+                return;
+            }
+            
+            // Récupérer les marchés sélectionnés
+            selectedMarkets = [];
+            document.querySelectorAll('input[type="checkbox"]:checked').forEach(checkbox => {
+                selectedMarkets.push(checkbox.value);
+            });
+            
+            if (selectedMarkets.length === 0) {
+                showNotification('Veuillez sélectionner au moins un marché', 'error');
+                return;
+            }
+            
+            // Récupérer les paramètres de trading
+            tradeDuration = parseInt(document.getElementById('tradeDuration').value) || 1;
+            marketChangeTime = parseInt(document.getElementById('marketChangeTime').value) || 5;
+            tradeAmount = parseFloat(document.getElementById('tradeAmount').value) || 0.35;
+            takeProfit = parseFloat(document.getElementById('takeProfit').value) || 5;
+            stopLoss = parseFloat(document.getElementById('stopLoss').value) || 1;
+            
+            // Réinitialiser les variables
+            currentMarketIndex = 0;
+            timeWithoutSignal = 0;
+            marketStartTime = new Date();
+            
+            // Simuler le démarrage du bot
+            statusIndicator.classList.remove('status-stopped');
+            statusIndicator.classList.add('status-running');
+            botStatusText.textContent = 'En cours d\'exécution';
+            startBotBtn.style.display = 'none';
+            stopBotBtn.style.display = 'inline-block';
+            
+            // Afficher les informations du marché
+            currentMarketInfo.classList.remove('hidden');
+            currentMarketName.textContent = selectedMarkets[currentMarketIndex];
+            updateMarketTime();
+            
+            // Démarrer le timer de changement de marché
+            startMarketTimer();
+            
+            showNotification('Bot de trading démarré avec succès!', 'success');
+            
+            // Envoyer une requête API pour obtenir les prix
+            if (ws && ws.readyState === WebSocket.OPEN) {
+                const request = {
+                    "ticks_history": selectedMarkets[currentMarketIndex],
+                    "end": "latest",
+                    "start": 1,
+                    "style": "ticks"
+                };
+                
+                ws.send(JSON.stringify(request));
+                addTerminalMessage('request', `Envoi de la requête de prix pour ${selectedMarkets[currentMarketIndex]}`);
+            }
+            
+            // Simuler l'exécution du bot avec gestion des risques
+            setTimeout(() => {
+                // Trade gagnant avec take profit atteint
+                const profit = Math.min(0.30, takeProfit);
+                addTradeToLog('CALL', selectedMarkets[currentMarketIndex], tradeDuration + ' min', '$' + tradeAmount.toFixed(2), '$' + takeProfit.toFixed(2), '$' + stopLoss.toFixed(2), '+$' + profit.toFixed(2));
+                resetMarketTimer();
+            }, 5000);
+            
+            setTimeout(() => {
+                // Trade perdant avec stop loss atteint
+                const loss = Math.min(0.35, stopLoss);
+                addTradeToLog('PUT', selectedMarkets[currentMarketIndex], tradeDuration + ' min', '$' + tradeAmount.toFixed(2), '$' + takeProfit.toFixed(2), '$' + stopLoss.toFixed(2), '-$' + loss.toFixed(2));
+                resetMarketTimer();
+            }, 12000);
+            
+            setTimeout(() => {
+                // Trade gagnant sans atteindre le take profit
+                addTradeToLog('CALL', selectedMarkets[currentMarketIndex], tradeDuration + ' min', '$' + tradeAmount.toFixed(2), '$' + takeProfit.toFixed(2), '$' + stopLoss.toFixed(2), '+$0.30');
+                resetMarketTimer();
+            }, 20000);
+        });
+        
+        stopBotBtn.addEventListener('click', () => {
+            // Simuler l'arrêt du bot
+            statusIndicator.classList.remove('status-running');
+            statusIndicator.classList.add('status-stopped');
+            botStatusText.textContent = 'Arrêté';
+            stopBotBtn.style.display = 'none';
+            startBotBtn.style.display = 'inline-block';
+            
+            // Cacher les informations du marché
+            currentMarketInfo.classList.add('hidden');
+            marketTimer.classList.add('hidden');
+            
+            // Arrêter les timers
+            clearInterval(marketChangeInterval);
+            clearInterval(marketTimerInterval);
+            
+            showNotification('Bot de trading arrêté', 'warning');
+        });
+        
+        // Fonctions pour le timer de marché
+        function startMarketTimer() {
+            // Afficher le timer
+            marketTimer.classList.remove('hidden');
+            
+            // Démarrer le timer de progression
+            clearInterval(marketChangeInterval);
+            marketChangeInterval = setInterval(() => {
+                timeWithoutSignal += 0.1; // Augmenter de 0.1 minute (6 secondes)
+                
+                // Mettre à jour l'affichage
+                timeWithoutSignalEl.textContent = timeWithoutSignal.toFixed(1);
+                timeUntilChangeEl.textContent = Math.max(0, (marketChangeTime - timeWithoutSignal).toFixed(1));
+                
+                // Mettre à jour la barre de progression
+                const progress = Math.min(100, (timeWithoutSignal / marketChangeTime) * 100);
+                progressBar.style.width = progress + '%';
+                
+                // Vérifier si le temps est écoulé
+                if (timeWithoutSignal >= marketChangeTime) {
+                    changeMarket();
+                }
+            }, 6000); // Toutes les 6 secondes (0.1 minute)
+            
+            // Mettre à jour le temps d'affichage du marché
+            marketTimerInterval = setInterval(updateMarketTime, 1000);
+        }
+        
+        function resetMarketTimer() {
+            timeWithoutSignal = 0;
+            timeWithoutSignalEl.textContent = '0';
+            timeUntilChangeEl.textContent = marketChangeTime;
+            progressBar.style.width = '0%';
+        }
+        
+        function changeMarket() {
+            // Passer au marché suivant
+            currentMarketIndex = (currentMarketIndex + 1) % selectedMarkets.length;
+            
+            // Mettre à jour l'affichage
+            currentMarketName.textContent = selectedMarkets[currentMarketIndex];
+            marketStartTime = new Date();
+            
+            // Réinitialiser le timer
+            resetMarketTimer();
+            
+            // Afficher une notification
+            showNotification(`Changement de marché vers ${selectedMarkets[currentMarketIndex]}`, 'info');
+            
+            // Envoyer une requête API pour obtenir les prix du nouveau marché
+            if (ws && ws.readyState === WebSocket.OPEN) {
+                const request = {
+                    "ticks_history": selectedMarkets[currentMarketIndex],
+                    "end": "latest",
+                    "start": 1,
+                    "style": "ticks"
+                };
+                
+                ws.send(JSON.stringify(request));
+                addTerminalMessage('request', `Envoi de la requête de prix pour ${selectedMarkets[currentMarketIndex]}`);
+            }
+            
+            // Simuler un trade après le changement de marché
+            setTimeout(() => {
+                // Trade avec take profit atteint
+                const profit = Math.min(0.25, takeProfit);
+                addTradeToLog('CALL', selectedMarkets[currentMarketIndex], tradeDuration + ' min', '$' + tradeAmount.toFixed(2), '$' + takeProfit.toFixed(2), '$' + stopLoss.toFixed(2), '+$' + profit.toFixed(2));
+                resetMarketTimer();
+            }, 8000);
+        }
+        
+        function updateMarketTime() {
+            if (marketStartTime) {
+                const now = new Date();
+                const diff = Math.floor((now - marketStartTime) / 1000); // en secondes
+                
+                const minutes = Math.floor(diff / 60);
+                const seconds = diff % 60;
+                
+                currentMarketTime.textContent = `Marché actif depuis ${minutes} min ${seconds} sec`;
+            }
+        }
+        
+        // Gestion de l'API Deriv
+        const loginSection = document.getElementById('loginSection');
+        const apiSection = document.getElementById('apiSection');
+        const loginBtn = document.getElementById('loginBtn');
+        const logoutBtn = document.getElementById('logoutBtn');
+        const refreshTokenBtn = document.getElementById('refreshTokenBtn');
+        const testApiBtn = document.getElementById('testApiBtn');
+        const clearTerminalBtn = document.getElementById('clearTerminalBtn');
+        const apiTerminal = document.getElementById('apiTerminal');
+        
+        // Vérifier si l'utilisateur est déjà connecté
+        const isLoggedIn = localStorage.getItem('derivLoggedIn') === 'true';
+        
+        if (isLoggedIn) {
+            appId = localStorage.getItem('derivAppId') || '1089';
+            token = localStorage.getItem('derivToken') || '';
+            
+            if (token) {
+                loginSection.classList.add('hidden');
+                apiSection.classList.remove('hidden');
+                
+                document.getElementById('appIdDisplay').textContent = appId;
+                
+                // Initialiser la connexion WebSocket
+                initializeWebSocket();
+            } else {
+                loginSection.classList.remove('hidden');
+                apiSection.classList.add('hidden');
+            }
+        } else {
+            loginSection.classList.remove('hidden');
+            apiSection.classList.add('hidden');
+        }
+        
+        loginBtn.addEventListener('click', () => {
+            appId = document.getElementById('appId').value || '1089';
+            token = document.getElementById('apiToken').value;
+            
+            if (!token) {
+                showNotification('Veuillez entrer un token API valide', 'error');
+                return;
+            }
+            
+            // Sauvegarder les informations
+            localStorage.setItem('derivLoggedIn', 'true');
+            localStorage.setItem('derivAppId', appId);
+            localStorage.setItem('derivToken', token);
+            
+            loginSection.classList.add('hidden');
+            apiSection.classList.remove('hidden');
+            
+            document.getElementById('appIdDisplay').textContent = appId;
+            
+            // Initialiser la connexion WebSocket
+            initializeWebSocket();
+            
+            showNotification('Connecté à l\'API Deriv avec succès!', 'success');
+        });
+        
+        logoutBtn.addEventListener('click', () => {
+            // Fermer la connexion WebSocket
+            if (ws) {
+                ws.close();
+                ws = null;
+            }
+            
+            localStorage.removeItem('derivLoggedIn');
+            localStorage.removeItem('derivAppId');
+            localStorage.removeItem('derivToken');
+            
+            loginSection.classList.remove('hidden');
+            apiSection.classList.add('hidden');
+            
+            showNotification('Déconnecté de l\'API Deriv', 'warning');
+        });
+        
+        refreshTokenBtn.addEventListener('click', () => {
+            // Simuler le rafraîchissement de la session
+            if (ws && ws.readyState === WebSocket.OPEN) {
+                const request = {
+                    "authorize": token
+                };
+                
+                ws.send(JSON.stringify(request));
+                addTerminalMessage('request', 'Rafraîchissement de la session');
+            } else {
+                showNotification('WebSocket non connecté', 'error');
+            }
+        });
+        
+        testApiBtn.addEventListener('click', () => {
+            if (ws && ws.readyState === WebSocket.OPEN) {
+                // Envoyer une requête de test
+                const request = {
+                    "ping": 1
+                };
+                
+                ws.send(JSON.stringify(request));
+                addTerminalMessage('request', 'Test de connexion (ping)');
+            } else {
+                showNotification('WebSocket non connecté', 'error');
+            }
+        });
+        
+        clearTerminalBtn.addEventListener('click', () => {
+            apiTerminal.innerHTML = '<div class="line">Terminal effacé</div>';
+        });
+        
+        // Initialisation de la connexion WebSocket
+        function initializeWebSocket() {
+            // Créer une nouvelle connexion WebSocket
+            ws = new WebSocket(`wss://ws.binaryws.com/websockets/v3?app_id=${appId}`);
+            
+            // Événement de connexion ouverte
+            ws.onopen = function(event) {
+                addTerminalMessage('success', 'Connecté à l\'API Deriv WebSocket');
+                
+                // Envoyer une requête d'autorisation
+                const authRequest = {
+                    "authorize": token
+                };
+                
+                ws.send(JSON.stringify(authRequest));
+                addTerminalMessage('request', 'Envoi de la requête d\'autorisation');
+            };
+            
+            // Événement de réception de message
+            ws.onmessage = function(event) {
+                const data = JSON.parse(event.data);
+                
+                if (data.error) {
+                    addTerminalMessage('error', `Erreur: ${data.error.message}`);
+                    showNotification(`Erreur API: ${data.error.message}`, 'error');
+                } else if (data.msg_type === 'authorize') {
+                    addTerminalMessage('response', `Autorisation réussie pour ${data.authorize.email}`);
+                    
+                    // Mettre à jour les informations du compte
+                    document.getElementById('apiAccount').textContent = data.authorize.email;
+                    document.getElementById('apiAccountType').textContent = data.authorize.is_virtual ? 'Demo' : 'Real';
+                    
+                    // Extraire les initiales pour l'avatar
+                    const initials = data.authorize.email.split('@')[0].split('.').map(n => n[0]).join('').toUpperCase();
+                    document.getElementById('userAvatar').textContent = initials;
+                    document.getElementById('userName').textContent = data.authorize.email.split('@')[0];
+                    document.getElementById('userStatus').textContent = 'Connecté';
+                    
+                    showNotification('Connecté avec succès!', 'success');
+                } else if (data.msg_type === 'ping') {
+                    addTerminalMessage('response', 'Pong reçu');
+                } else if (data.msg_type === 'ticks_history') {
+                    addTerminalMessage('response', `Données de prix reçues pour ${data.echo_req.ticks_history}`);
+                } else {
+                    addTerminalMessage('response', `Message reçu: ${data.msg_type}`);
+                }
+            };
+            
+            // Événement d'erreur
+            ws.onerror = function(error) {
+                addTerminalMessage('error', `Erreur WebSocket: ${error.message}`);
+                showNotification('Erreur de connexion à l\'API', 'error');
+            };
+            
+            // Événement de fermeture
+            ws.onclose = function(event) {
+                addTerminalMessage('error', 'Connexion WebSocket fermée');
+                
+                if (event.code !== 1000) {
+                    showNotification('Connexion à l\'API perdue', 'warning');
+                }
+            };
+        }
+        
+        // Fonctions utilitaires
+        function showNotification(message, type) {
+            const notification = document.getElementById('notification');
+            notification.textContent = message;
+            notification.className = 'notification';
+            notification.classList.add(type);
+            notification.classList.add('show');
+            
+            setTimeout(() => {
+                notification.classList.remove('show');
+            }, 3000);
+        }
+        
+        function addTradeToLog(type, asset, duration, amount, tp, sl, result) {
+            const table = document.querySelector('tbody');
+            const row = table.insertRow(0); // Insérer au début
+            
+            const time = new Date().toLocaleTimeString();
+            
+            row.innerHTML = `
+                <td style="padding: 8px;">${time}</td>
+                <td style="padding: 8px;">${asset}</td>
+                <td style="padding: 8px;">${type}</td>
+                <td style="padding: 8px;">${duration}</td>
+                <td style="padding: 8px;">${amount}</td>
+                <td style="padding: 8px; color: var(--success);">${tp}</td>
+                <td style="padding: 8px; color: var(--danger);">${sl}</td>
+                <td style="padding: 8px; color: ${result.startsWith('+') ? 'var(--success)' : 'var(--danger)'};">${result}</td>
+            `;
+        }
+        
+        function addTerminalMessage(type, message) {
+            const line = document.createElement('div');
+            line.className = 'line';
+            
+            if (type === 'request') {
+                line.innerHTML = `<span class="request">> ${message}</span>`;
+            } else if (type === 'response') {
+                line.innerHTML = `<span class="response">< ${message}</span>`;
+            } else if (type === 'error') {
+                line.innerHTML = `<span class="error">! ${message}</span>`;
+            } else if (type === 'success') {
+                line.innerHTML = `<span class="success">✓ ${message}</span>`;
+            }
+            
+            apiTerminal.appendChild(line);
+            apiTerminal.scrollTop = apiTerminal.scrollHeight;
+        }
+    </script>
+</body>
+</html>
