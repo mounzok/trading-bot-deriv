@@ -205,6 +205,11 @@
             background-color: #3b78e7;
         }
         
+        .btn-block {
+            display: block;
+            width: 100%;
+        }
+        
         .bot-container {
             background-color: #f8f9fa;
             border: 1px solid #ddd;
@@ -698,6 +703,218 @@
             margin-right: 8px;
         }
         
+        .debug-panel {
+            background-color: #f5f5f5;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            padding: 1rem;
+            margin-top: 1rem;
+        }
+        
+        .debug-panel h4 {
+            margin-top: 0;
+            color: var(--dark);
+        }
+        
+        .debug-info {
+            font-family: monospace;
+            font-size: 0.85rem;
+            background-color: #fff;
+            padding: 0.5rem;
+            border-radius: 3px;
+            margin-top: 0.5rem;
+        }
+        
+        .simple-test {
+            background-color: #f0f7ff;
+            border: 1px solid #b6d7ff;
+            border-radius: 8px;
+            padding: 1.5rem;
+            margin-top: 1.5rem;
+        }
+        
+        .simple-test h4 {
+            margin-top: 0;
+            color: var(--primary);
+        }
+        
+        .simple-test-result {
+            background-color: #fff;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            padding: 1rem;
+            margin-top: 1rem;
+            font-family: monospace;
+            font-size: 0.9rem;
+            max-height: 200px;
+            overflow-y: auto;
+        }
+        
+        .loading {
+            display: inline-block;
+            width: 20px;
+            height: 20px;
+            border: 3px solid rgba(255,255,255,.3);
+            border-radius: 50%;
+            border-top-color: #fff;
+            animation: spin 1s ease-in-out infinite;
+        }
+        
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+        
+        .account-selection {
+            background-color: #f8f9fa;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            padding: 1.5rem;
+            margin-bottom: 1.5rem;
+        }
+        
+        .account-selection h4 {
+            margin-top: 0;
+            color: var(--dark);
+            margin-bottom: 1rem;
+        }
+        
+        .account-card {
+            background: white;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            padding: 1rem;
+            margin-bottom: 1rem;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+        
+        .account-card:hover {
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+            transform: translateY(-2px);
+        }
+        
+        .account-card.selected {
+            border-color: var(--primary);
+            box-shadow: 0 0 0 2px rgba(26, 115, 232, 0.2);
+        }
+        
+        .account-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 0.5rem;
+        }
+        
+        .account-type {
+            font-weight: 600;
+            color: var(--dark);
+            display: flex;
+            align-items: center;
+        }
+        
+        .account-type i {
+            margin-right: 8px;
+        }
+        
+        .account-balance {
+            font-weight: 700;
+            color: var(--primary);
+        }
+        
+        .account-details {
+            color: #666;
+            font-size: 0.9rem;
+        }
+        
+        .account-details div {
+            margin-bottom: 0.25rem;
+        }
+        
+        .deriv-login {
+            background-color: #f0f7ff;
+            border: 1px solid #b6d7ff;
+            border-radius: 8px;
+            padding: 1.5rem;
+            margin-bottom: 1.5rem;
+            text-align: center;
+        }
+        
+        .deriv-login h4 {
+            margin-top: 0;
+            color: var(--primary);
+            margin-bottom: 1rem;
+        }
+        
+        .deriv-login-btn {
+            background-color: var(--primary);
+            color: white;
+            border: none;
+            border-radius: 4px;
+            padding: 12px 24px;
+            font-size: 1rem;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.3s;
+            display: inline-flex;
+            align-items: center;
+            text-decoration: none;
+        }
+        
+        .deriv-login-btn:hover {
+            background-color: var(--secondary);
+        }
+        
+        .deriv-login-btn i {
+            margin-right: 8px;
+        }
+        
+        .deriv-info {
+            margin-top: 1rem;
+            color: #666;
+            font-size: 0.9rem;
+        }
+        
+        .token-form {
+            background-color: #f8f9fa;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            padding: 1.5rem;
+            margin-bottom: 1.5rem;
+        }
+        
+        .token-form h4 {
+            margin-top: 0;
+            color: var(--dark);
+            margin-bottom: 1rem;
+        }
+        
+        .token-form .form-group {
+            margin-bottom: 1rem;
+        }
+        
+        .token-help {
+            background-color: #e8f0fe;
+            border-left: 4px solid var(--primary);
+            padding: 1rem;
+            margin-top: 1rem;
+            border-radius: 4px;
+        }
+        
+        .token-help h5 {
+            margin-top: 0;
+            color: var(--primary);
+            margin-bottom: 0.5rem;
+        }
+        
+        .token-help ol {
+            margin-left: 1.5rem;
+            margin-bottom: 0;
+        }
+        
+        .token-help li {
+            margin-bottom: 0.5rem;
+        }
+        
         @media (max-width: 768px) {
             .header-content {
                 flex-direction: column;
@@ -774,7 +991,7 @@
                 </div>
                 <div class="stat-card">
                     <div class="stat-label">Solde du compte</div>
-                    <div class="stat-value">$1,245.75</div>
+                    <div class="stat-value" id="accountBalance">$1,245.75</div>
                     <div class="stat-label">+$89.30 cette semaine</div>
                 </div>
             </div>
@@ -792,7 +1009,7 @@
                     <div class="current-market hidden" id="currentMarketInfo">
                         <i class="fas fa-chart-line"></i>
                         <div class="market-info">
-                            <div class="market-name" id="currentMarketName">1HZ10V</div>
+                            <div class="market-name" id="currentMarketName">R_10</div>
                             <div class="market-time" id="currentMarketTime">Marché actif depuis 2 min 30 sec</div>
                         </div>
                     </div>
@@ -811,6 +1028,7 @@
                         <div class="tab">Stratégie</div>
                         <div class="tab">Gestion des Risques</div>
                         <div class="tab">API Terminal</div>
+                        <div class="tab">Test Simple</div>
                         <div class="tab">Journal</div>
                     </div>
                     
@@ -823,24 +1041,24 @@
                                 <label>Marchés disponibles</label>
                                 <div class="checkbox-group">
                                     <div class="checkbox-item">
-                                        <input type="checkbox" id="market1" value="1HZ10V" checked>
-                                        <label for="market1">1HZ10V (Volatility 10)</label>
+                                        <input type="checkbox" id="market1" value="R_10" checked>
+                                        <label for="market1">R_10 (Volatility 10)</label>
                                     </div>
                                     <div class="checkbox-item">
-                                        <input type="checkbox" id="market2" value="1HZ25V">
-                                        <label for="market2">1HZ25V (Volatility 25)</label>
+                                        <input type="checkbox" id="market2" value="R_25">
+                                        <label for="market2">R_25 (Volatility 25)</label>
                                     </div>
                                     <div class="checkbox-item">
-                                        <input type="checkbox" id="market3" value="1HZ50V">
-                                        <label for="market3">1HZ50V (Volatility 50)</label>
+                                        <input type="checkbox" id="market3" value="R_50">
+                                        <label for="market3">R_50 (Volatility 50)</label>
                                     </div>
                                     <div class="checkbox-item">
-                                        <input type="checkbox" id="market4" value="1HZ75V">
-                                        <label for="market4">1HZ75V (Volatility 75)</label>
+                                        <input type="checkbox" id="market4" value="R_75">
+                                        <label for="market4">R_75 (Volatility 75)</label>
                                     </div>
                                     <div class="checkbox-item">
-                                        <input type="checkbox" id="market5" value="1HZ100V">
-                                        <label for="market5">1HZ100V (Volatility 100)</label>
+                                        <input type="checkbox" id="market5" value="R_100">
+                                        <label for="market5">R_100 (Volatility 100)</label>
                                     </div>
                                 </div>
                             </div>
@@ -972,6 +1190,16 @@
                             <div style="margin-top: 1rem;">
                                 <button class="btn btn-info" id="testApiBtn">Tester la connexion API</button>
                                 <button class="btn btn-warning" id="clearTerminalBtn">Effacer le terminal</button>
+                                <button class="btn btn-success" id="getTicksBtn">Obtenir les ticks</button>
+                            </div>
+                            
+                            <div class="debug-panel">
+                                <h4>Informations de débogage</h4>
+                                <div class="debug-info" id="debugInfo">
+                                    App ID: Non défini<br>
+                                    Token: Non défini<br>
+                                    Statut: Non connecté
+                                </div>
                             </div>
                             
                             <div class="github-section">
@@ -980,6 +1208,46 @@
                                 <a href="https://github.com/deriv-com/API" target="_blank" class="github-link">
                                     <i class="fab fa-github"></i> Voir la documentation API
                                 </a>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="tab-content">
+                        <div class="bot-container">
+                            <h3>Test Simple API</h3>
+                            <p>Cette section permet de tester l'API Deriv avec des requêtes simples pour diagnostiquer les problèmes.</p>
+                            
+                            <div class="simple-test">
+                                <h4>Test de connexion à l'API</h4>
+                                <p>Cliquez sur le bouton ci-dessous pour tester la connexion à l'API Deriv avec vos identifiants.</p>
+                                
+                                <button class="btn btn-success" id="simpleTestBtn">Tester la connexion</button>
+                                
+                                <div class="simple-test-result" id="simpleTestResult">
+                                    Cliquez sur "Tester la connexion" pour voir les résultats...
+                                </div>
+                            </div>
+                            
+                            <div class="simple-test" style="margin-top: 1.5rem;">
+                                <h4>Obtenir les prix du marché</h4>
+                                <p>Testez la récupération des prix pour un marché spécifique.</p>
+                                
+                                <div class="form-group">
+                                    <label>Sélectionner un marché</label>
+                                    <select class="form-control" id="marketSelect">
+                                        <option value="R_10">R_10 (Volatility 10)</option>
+                                        <option value="R_25">R_25 (Volatility 25)</option>
+                                        <option value="R_50">R_50 (Volatility 50)</option>
+                                        <option value="R_75">R_75 (Volatility 75)</option>
+                                        <option value="R_100">R_100 (Volatility 100)</option>
+                                    </select>
+                                </div>
+                                
+                                <button class="btn btn-info" id="getPriceBtn">Obtenir les prix</button>
+                                
+                                <div class="simple-test-result" id="priceResult" style="margin-top: 1rem;">
+                                    Sélectionnez un marché et cliquez sur "Obtenir les prix"...
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -1004,7 +1272,7 @@
                                     <tbody>
                                         <tr>
                                             <td style="padding: 8px;">14:32:15</td>
-                                            <td style="padding: 8px;">1HZ10V</td>
+                                            <td style="padding: 8px;">R_10</td>
                                             <td style="padding: 8px;">CALL</td>
                                             <td style="padding: 8px;">1 min</td>
                                             <td style="padding: 8px;">$0.35</td>
@@ -1014,7 +1282,7 @@
                                         </tr>
                                         <tr>
                                             <td style="padding: 8px;">14:28:42</td>
-                                            <td style="padding: 8px;">1HZ10V</td>
+                                            <td style="padding: 8px;">R_10</td>
                                             <td style="padding: 8px;">PUT</td>
                                             <td style="padding: 8px;">1 min</td>
                                             <td style="padding: 8px;">$0.35</td>
@@ -1024,7 +1292,7 @@
                                         </tr>
                                         <tr>
                                             <td style="padding: 8px;">14:25:18</td>
-                                            <td style="padding: 8px;">1HZ10V</td>
+                                            <td style="padding: 8px;">R_10</td>
                                             <td style="padding: 8px;">CALL</td>
                                             <td style="padding: 8px;">1 min</td>
                                             <td style="padding: 8px;">$0.35</td>
@@ -1042,56 +1310,75 @@
             
             <div class="card">
                 <div class="card-header">
-                    <h2 class="card-title">API Deriv</h2>
+                    <h2 class="card-title">Connexion Deriv</h2>
                 </div>
                 <div class="card-body">
                     <div id="loginSection" class="hidden">
-                        <div class="login-container">
-                            <div class="login-header">
-                                <div class="login-logo">
-                                    <i class="fas fa-chart-line"></i>
+                        <div class="deriv-login">
+                            <h4>Connexion sécurisée à Deriv</h4>
+                            <p>Connectez-vous à votre compte Deriv pour que nous puissions récupérer automatiquement vos informations de compte.</p>
+                            
+                            <a href="https://app.deriv.com" target="_blank" class="deriv-login-btn">
+                                <i class="fas fa-external-link-alt"></i> Se connecter à Deriv
+                            </a>
+                            
+                            <div class="deriv-info">
+                                <p>1. Cliquez sur le bouton ci-dessus pour vous connecter à Deriv</p>
+                                <p>2. Une fois connecté, revenez sur cette page</p>
+                                <p>3. Cliquez sur "Récupérer mes comptes" ci-dessous</p>
+                            </div>
+                            
+                            <div class="token-form" id="tokenForm">
+                                <h4>Saisissez votre token API</h4>
+                                <div class="form-group">
+                                    <label>Token API</label>
+                                    <input type="password" class="form-control" id="apiTokenInput" placeholder="Collez votre token API ici">
                                 </div>
-                                <h2>Connexion à l'API Deriv</h2>
-                                <p>Connectez-vous avec votre App ID et Token API</p>
+                                
+                                <button class="btn btn-success btn-block" id="fetchAccountsBtn">
+                                    <i class="fas fa-sync-alt"></i> Récupérer mes comptes
+                                </button>
+                                
+                                <div class="token-help">
+                                    <h5>Comment obtenir votre token API ?</h5>
+                                    <ol>
+                                        <li>Connectez-vous à votre compte Deriv</li>
+                                        <li>Allez dans "Paramètres du compte" → "Token API"</li>
+                                        <li>Cliquez sur "Créer un nouveau token"</li>
+                                        <li>Sélectionnez les permissions "trade" et "read"</li>
+                                        <li>Copiez le token et collez-le ci-dessus</li>
+                                    </ol>
+                                </div>
                             </div>
+                        </div>
+                        
+                        <div class="account-selection hidden" id="accountSelection">
+                            <h4>Sélectionnez un compte</h4>
+                            <p>Choisissez le compte que vous souhaitez utiliser pour le trading.</p>
                             
-                            <div class="form-group">
-                                <label>App ID</label>
-                                <input type="text" class="form-control" id="appId" placeholder="1089" value="1089">
-                                <small style="color: #666; font-size: 0.85rem;">Utilisez 1089 pour l'application de test</small>
-                            </div>
-                            
-                            <div class="form-group">
-                                <label>Token API</label>
-                                <input type="password" class="form-control" id="apiToken" placeholder="votre_token_api">
-                                <small style="color: #666; font-size: 0.85rem;">Obtenez votre token depuis <a href="https://app.deriv.com/account/api-token" target="_blank">votre compte Deriv</a></small>
-                            </div>
-                            
-                            <button class="btn btn-success" id="loginBtn" style="width: 100%; margin-top: 1rem;">Se connecter</button>
-                            
-                            <div class="divider">
-                                <span>ou</span>
-                            </div>
-                            
-                            <div class="signup-link">
-                                Vous n'avez pas de compte? <a href="https://app.deriv.com/signup" target="_blank">Créer un compte</a>
+                            <div id="accountsList">
+                                <!-- Les comptes seront chargés ici -->
                             </div>
                         </div>
                     </div>
                     
                     <div id="apiSection">
                         <div class="api-info">
-                            <h3>Informations API</h3>
-                            <p><strong>Statut:</strong> <span id="apiStatus">Connecté</span></p>
-                            <p><strong>App ID:</strong> <span id="appIdDisplay">1089</span></p>
-                            <p><strong>Compte:</strong> <span id="apiAccount">demo@deriv.com</span></p>
+                            <h3>Informations du Compte</h3>
+                            <p><strong>Email:</strong> <span id="apiAccount">demo@deriv.com</span></p>
                             <p><strong>Type de compte:</strong> <span id="apiAccountType">Demo</span></p>
+                            <p><strong>Balance:</strong> <span id="apiBalance">$10,000.00</span></p>
+                            <p><strong>Devise:</strong> <span id="apiCurrency">USD</span></p>
                             <p><strong>Permissions:</span> <span id="apiPermissions">Trade, Read</span></p>
                         </div>
                         
                         <div style="margin-top: 1.5rem;">
-                            <button class="btn btn-warning" id="refreshTokenBtn">Rafraîchir la session</button>
-                            <button class="btn btn-danger" id="logoutBtn">Déconnexion</button>
+                            <button class="btn btn-warning" id="refreshAccountsBtn">
+                                <i class="fas fa-sync-alt"></i> Actualiser les comptes
+                            </button>
+                            <button class="btn btn-danger" id="logoutBtn">
+                                <i class="fas fa-sign-out-alt"></i> Déconnexion
+                            </button>
                         </div>
                     </div>
                 </div>
@@ -1133,10 +1420,12 @@
     <div class="notification" id="notification"></div>
     
     <script>
-        // API Deriv WebSocket
-        let ws = null;
+        // Variables globales
         let appId = '1089';
         let token = '';
+        let connectionStatus = 'disconnected';
+        let selectedAccount = null;
+        let accounts = [];
         
         // Gestion des onglets
         document.querySelectorAll('.tab').forEach(tab => {
@@ -1159,7 +1448,7 @@
         let marketChangeInterval;
         let marketTimerInterval;
         let currentMarketIndex = 0;
-        let selectedMarkets = ['1HZ10V'];
+        let selectedMarkets = ['R_10'];
         let timeWithoutSignal = 0;
         let marketChangeTime = 5; // minutes
         let tradeDuration = 1; // minutes
@@ -1183,8 +1472,8 @@
         
         startBotBtn.addEventListener('click', () => {
             // Vérifier si l'utilisateur est connecté à l'API
-            if (!ws || ws.readyState !== WebSocket.OPEN) {
-                showNotification('Veuillez vous connecter à l\'API Deriv d\'abord', 'error');
+            if (connectionStatus !== 'connected' || !selectedAccount) {
+                showNotification('Veuillez vous connecter à l\'API Deriv et sélectionner un compte', 'error');
                 return;
             }
             
@@ -1227,19 +1516,6 @@
             startMarketTimer();
             
             showNotification('Bot de trading démarré avec succès!', 'success');
-            
-            // Envoyer une requête API pour obtenir les prix
-            if (ws && ws.readyState === WebSocket.OPEN) {
-                const request = {
-                    "ticks_history": selectedMarkets[currentMarketIndex],
-                    "end": "latest",
-                    "start": 1,
-                    "style": "ticks"
-                };
-                
-                ws.send(JSON.stringify(request));
-                addTerminalMessage('request', `Envoi de la requête de prix pour ${selectedMarkets[currentMarketIndex]}`);
-            }
             
             // Simuler l'exécution du bot avec gestion des risques
             setTimeout(() => {
@@ -1331,19 +1607,6 @@
             // Afficher une notification
             showNotification(`Changement de marché vers ${selectedMarkets[currentMarketIndex]}`, 'info');
             
-            // Envoyer une requête API pour obtenir les prix du nouveau marché
-            if (ws && ws.readyState === WebSocket.OPEN) {
-                const request = {
-                    "ticks_history": selectedMarkets[currentMarketIndex],
-                    "end": "latest",
-                    "start": 1,
-                    "style": "ticks"
-                };
-                
-                ws.send(JSON.stringify(request));
-                addTerminalMessage('request', `Envoi de la requête de prix pour ${selectedMarkets[currentMarketIndex]}`);
-            }
-            
             // Simuler un trade après le changement de marché
             setTimeout(() => {
                 // Trade avec take profit atteint
@@ -1368,28 +1631,36 @@
         // Gestion de l'API Deriv
         const loginSection = document.getElementById('loginSection');
         const apiSection = document.getElementById('apiSection');
-        const loginBtn = document.getElementById('loginBtn');
+        const tokenForm = document.getElementById('tokenForm');
+        const fetchAccountsBtn = document.getElementById('fetchAccountsBtn');
+        const refreshAccountsBtn = document.getElementById('refreshAccountsBtn');
         const logoutBtn = document.getElementById('logoutBtn');
-        const refreshTokenBtn = document.getElementById('refreshTokenBtn');
         const testApiBtn = document.getElementById('testApiBtn');
+        const getTicksBtn = document.getElementById('getTicksBtn');
         const clearTerminalBtn = document.getElementById('clearTerminalBtn');
         const apiTerminal = document.getElementById('apiTerminal');
+        const debugInfo = document.getElementById('debugInfo');
+        const simpleTestBtn = document.getElementById('simpleTestBtn');
+        const simpleTestResult = document.getElementById('simpleTestResult');
+        const getPriceBtn = document.getElementById('getPriceBtn');
+        const priceResult = document.getElementById('priceResult');
+        const marketSelect = document.getElementById('marketSelect');
+        const accountSelection = document.getElementById('accountSelection');
+        const accountsList = document.getElementById('accountsList');
+        const apiTokenInput = document.getElementById('apiTokenInput');
         
         // Vérifier si l'utilisateur est déjà connecté
         const isLoggedIn = localStorage.getItem('derivLoggedIn') === 'true';
         
         if (isLoggedIn) {
-            appId = localStorage.getItem('derivAppId') || '1089';
             token = localStorage.getItem('derivToken') || '';
             
             if (token) {
                 loginSection.classList.add('hidden');
                 apiSection.classList.remove('hidden');
                 
-                document.getElementById('appIdDisplay').textContent = appId;
-                
-                // Initialiser la connexion WebSocket
-                initializeWebSocket();
+                // Mettre à jour les informations de l'utilisateur
+                updateUserInfo();
             } else {
                 loginSection.classList.remove('hidden');
                 apiSection.classList.add('hidden');
@@ -1399,73 +1670,59 @@
             apiSection.classList.add('hidden');
         }
         
-        loginBtn.addEventListener('click', () => {
-            appId = document.getElementById('appId').value || '1089';
-            token = document.getElementById('apiToken').value;
+        fetchAccountsBtn.addEventListener('click', () => {
+            const userToken = apiTokenInput.value.trim();
             
-            if (!token) {
-                showNotification('Veuillez entrer un token API valide', 'error');
+            if (!userToken) {
+                showNotification('Veuillez saisir votre token API', 'error');
                 return;
             }
             
-            // Sauvegarder les informations
+            token = userToken;
+            
+            // Sauvegarder le token
             localStorage.setItem('derivLoggedIn', 'true');
-            localStorage.setItem('derivAppId', appId);
             localStorage.setItem('derivToken', token);
             
-            loginSection.classList.add('hidden');
-            apiSection.classList.remove('hidden');
-            
-            document.getElementById('appIdDisplay').textContent = appId;
-            
-            // Initialiser la connexion WebSocket
-            initializeWebSocket();
-            
-            showNotification('Connecté à l\'API Deriv avec succès!', 'success');
+            // Récupérer les comptes
+            fetchAccounts();
+        });
+        
+        refreshAccountsBtn.addEventListener('click', () => {
+            fetchAccounts();
         });
         
         logoutBtn.addEventListener('click', () => {
-            // Fermer la connexion WebSocket
-            if (ws) {
-                ws.close();
-                ws = null;
-            }
-            
             localStorage.removeItem('derivLoggedIn');
-            localStorage.removeItem('derivAppId');
             localStorage.removeItem('derivToken');
             
             loginSection.classList.remove('hidden');
             apiSection.classList.add('hidden');
+            accountSelection.classList.add('hidden');
+            tokenForm.classList.remove('hidden');
             
-            showNotification('Déconnecté de l\'API Deriv', 'warning');
-        });
-        
-        refreshTokenBtn.addEventListener('click', () => {
-            // Simuler le rafraîchissement de la session
-            if (ws && ws.readyState === WebSocket.OPEN) {
-                const request = {
-                    "authorize": token
-                };
-                
-                ws.send(JSON.stringify(request));
-                addTerminalMessage('request', 'Rafraîchissement de la session');
-            } else {
-                showNotification('WebSocket non connecté', 'error');
-            }
+            connectionStatus = 'disconnected';
+            selectedAccount = null;
+            accounts = [];
+            
+            updateDebugInfo();
+            
+            showNotification('Déconnecté de Deriv', 'warning');
         });
         
         testApiBtn.addEventListener('click', () => {
-            if (ws && ws.readyState === WebSocket.OPEN) {
-                // Envoyer une requête de test
-                const request = {
-                    "ping": 1
-                };
-                
-                ws.send(JSON.stringify(request));
-                addTerminalMessage('request', 'Test de connexion (ping)');
+            if (connectionStatus === 'connected' && selectedAccount) {
+                testAPIConnection();
             } else {
-                showNotification('WebSocket non connecté', 'error');
+                showNotification('Veuillez vous connecter et sélectionner un compte', 'error');
+            }
+        });
+        
+        getTicksBtn.addEventListener('click', () => {
+            if (connectionStatus === 'connected' && selectedAccount) {
+                getMarketData('R_10');
+            } else {
+                showNotification('Veuillez vous connecter et sélectionner un compte', 'error');
             }
         });
         
@@ -1473,69 +1730,78 @@
             apiTerminal.innerHTML = '<div class="line">Terminal effacé</div>';
         });
         
-        // Initialisation de la connexion WebSocket
-        function initializeWebSocket() {
-            // Créer une nouvelle connexion WebSocket
-            ws = new WebSocket(`wss://ws.binaryws.com/websockets/v3?app_id=${appId}`);
-            
-            // Événement de connexion ouverte
-            ws.onopen = function(event) {
-                addTerminalMessage('success', 'Connecté à l\'API Deriv WebSocket');
+        simpleTestBtn.addEventListener('click', () => {
+            if (connectionStatus === 'connected' && selectedAccount) {
+                simpleTestResult.innerHTML = '<div class="loading"></div> Test en cours...';
                 
-                // Envoyer une requête d'autorisation
-                const authRequest = {
-                    "authorize": token
-                };
+                // Test simple avec l'API REST
+                const url = `https://deriv.binary.com/https://www.binary.com/en/api?action=authorize&authorize=${token}&app_id=${appId}`;
                 
-                ws.send(JSON.stringify(authRequest));
-                addTerminalMessage('request', 'Envoi de la requête d\'autorisation');
-            };
-            
-            // Événement de réception de message
-            ws.onmessage = function(event) {
-                const data = JSON.parse(event.data);
+                fetch(url)
+                    .then(response => response.json())
+                    .then(data => {
+                        console.log('Réponse API:', data);
+                        
+                        if (data.error) {
+                            simpleTestResult.innerHTML = `<div style="color: var(--danger);">Erreur: ${data.error.message}</div>`;
+                            showNotification(`Erreur API: ${data.error.message}`, 'error');
+                        } else {
+                            simpleTestResult.innerHTML = `
+                                <div style="color: var(--success);">Connexion réussie!</div>
+                                <div>Email: ${data.authorize.email}</div>
+                                <div>Type de compte: ${data.authorize.is_virtual ? 'Demo' : 'Real'}</div>
+                                <div>Token: ${token.substring(0, 10)}...</div>
+                            `;
+                            
+                            showNotification('Connecté avec succès!', 'success');
+                        }
+                    })
+                    .catch(error => {
+                        console.error('Erreur:', error);
+                        simpleTestResult.innerHTML = `<div style="color: var(--danger);">Erreur de connexion: ${error.message}</div>`;
+                        showNotification(`Erreur de connexion: ${error.message}`, 'error');
+                    });
+            } else {
+                simpleTestResult.innerHTML = '<div style="color: var(--danger);">Veuillez vous connecter et sélectionner un compte</div>';
+            }
+        });
+        
+        getPriceBtn.addEventListener('click', () => {
+            if (connectionStatus === 'connected' && selectedAccount) {
+                const market = marketSelect.value;
+                priceResult.innerHTML = '<div class="loading"></div> Obtention des prix...';
                 
-                if (data.error) {
-                    addTerminalMessage('error', `Erreur: ${data.error.message}`);
-                    showNotification(`Erreur API: ${data.error.message}`, 'error');
-                } else if (data.msg_type === 'authorize') {
-                    addTerminalMessage('response', `Autorisation réussie pour ${data.authorize.email}`);
-                    
-                    // Mettre à jour les informations du compte
-                    document.getElementById('apiAccount').textContent = data.authorize.email;
-                    document.getElementById('apiAccountType').textContent = data.authorize.is_virtual ? 'Demo' : 'Real';
-                    
-                    // Extraire les initiales pour l'avatar
-                    const initials = data.authorize.email.split('@')[0].split('.').map(n => n[0]).join('').toUpperCase();
-                    document.getElementById('userAvatar').textContent = initials;
-                    document.getElementById('userName').textContent = data.authorize.email.split('@')[0];
-                    document.getElementById('userStatus').textContent = 'Connecté';
-                    
-                    showNotification('Connecté avec succès!', 'success');
-                } else if (data.msg_type === 'ping') {
-                    addTerminalMessage('response', 'Pong reçu');
-                } else if (data.msg_type === 'ticks_history') {
-                    addTerminalMessage('response', `Données de prix reçues pour ${data.echo_req.ticks_history}`);
-                } else {
-                    addTerminalMessage('response', `Message reçu: ${data.msg_type}`);
-                }
-            };
-            
-            // Événement d'erreur
-            ws.onerror = function(error) {
-                addTerminalMessage('error', `Erreur WebSocket: ${error.message}`);
-                showNotification('Erreur de connexion à l\'API', 'error');
-            };
-            
-            // Événement de fermeture
-            ws.onclose = function(event) {
-                addTerminalMessage('error', 'Connexion WebSocket fermée');
+                // Obtenir les prix du marché
+                const url = `https://deriv.binary.com/https://www.binary.com/en/api?action=ticks&ticks=${market}&app_id=${appId}`;
                 
-                if (event.code !== 1000) {
-                    showNotification('Connexion à l\'API perdue', 'warning');
-                }
-            };
-        }
+                fetch(url)
+                    .then(response => response.json())
+                    .then(data => {
+                        console.log('Réponse prix:', data);
+                        
+                        if (data.error) {
+                            priceResult.innerHTML = `<div style="color: var(--danger);">Erreur: ${data.error.message}</div>`;
+                            showNotification(`Erreur API: ${data.error.message}`, 'error');
+                        } else {
+                            priceResult.innerHTML = `
+                                <div style="color: var(--success);">Données obtenues avec succès!</div>
+                                <div>Marché: ${data.tick.symbol}</div>
+                                <div>Prix: ${data.tick.quote}</div>
+                                <div>Heure: ${new Date(data.tick.epoch * 1000).toLocaleString()}</div>
+                            `;
+                            
+                            showNotification(`Prix obtenu pour ${market}: ${data.tick.quote}`, 'success');
+                        }
+                    })
+                    .catch(error => {
+                        console.error('Erreur:', error);
+                        priceResult.innerHTML = `<div style="color: var(--danger);">Erreur de connexion: ${error.message}</div>`;
+                        showNotification(`Erreur de connexion: ${error.message}`, 'error');
+                    });
+            } else {
+                priceResult.innerHTML = '<div style="color: var(--danger);">Veuillez vous connecter et sélectionner un compte</div>';
+            }
+        });
         
         // Fonctions utilitaires
         function showNotification(message, type) {
@@ -1584,6 +1850,193 @@
             
             apiTerminal.appendChild(line);
             apiTerminal.scrollTop = apiTerminal.scrollHeight;
+        }
+        
+        function updateDebugInfo() {
+            debugInfo.innerHTML = `
+                App ID: ${appId}<br>
+                Token: ${token ? 'Défini' : 'Non défini'}<br>
+                Compte sélectionné: ${selectedAccount ? selectedAccount.loginid : 'Aucun'}<br>
+                Statut: ${connectionStatus}
+            `;
+        }
+        
+        function updateUserInfo() {
+            if (selectedAccount) {
+                document.getElementById('apiAccount').textContent = selectedAccount.email || selectedAccount.loginid;
+                document.getElementById('apiAccountType').textContent = selectedAccount.is_virtual ? 'Demo' : 'Real';
+                document.getElementById('apiBalance').textContent = `$${parseFloat(selectedAccount.balance).toFixed(2)}`;
+                document.getElementById('apiCurrency').textContent = selectedAccount.currency || 'USD';
+                document.getElementById('accountBalance').textContent = `$${parseFloat(selectedAccount.balance).toFixed(2)}`;
+                
+                // Extraire les initiales pour l'avatar
+                const initials = (selectedAccount.email || selectedAccount.loginid).split('@')[0].split('.').map(n => n[0]).join('').toUpperCase();
+                document.getElementById('userAvatar').textContent = initials;
+                document.getElementById('userName').textContent = selectedAccount.email || selectedAccount.loginid;
+                document.getElementById('userStatus').textContent = 'Connecté';
+            }
+        }
+        
+        function fetchAccounts() {
+            showNotification('Récupération des comptes en cours...', 'info');
+            
+            // Récupérer les comptes de l'utilisateur
+            const url = `https://deriv.binary.com/https://www.binary.com/en/api?action=authorize&authorize=${token}&app_id=${appId}`;
+            
+            fetch(url)
+                .then(response => response.json())
+                .then(data => {
+                    console.log('Réponse autorisation:', data);
+                    
+                    if (data.error) {
+                        showNotification(`Erreur: ${data.error.message}`, 'error');
+                        return;
+                    }
+                    
+                    // Maintenant, récupérer la liste des comptes
+                    const accountsUrl = `https://deriv.binary.com/https://www.binary.com/en/api?action=trading_platform_accounts&trading_platform_accounts=1&app_id=${appId}`;
+                    
+                    return fetch(accountsUrl);
+                })
+                .then(response => response.json())
+                .then(data => {
+                    console.log('Réponse comptes:', data);
+                    
+                    if (data.error) {
+                        showNotification(`Erreur: ${data.error.message}`, 'error');
+                        return;
+                    }
+                    
+                    // Filtrer les comptes pour ne garder que les comptes Deriv
+                    accounts = data.trading_platform_accounts.filter(account => 
+                        account.platform === 'deriv' && (account.account_type === 'demo' || account.account_type === 'real')
+                    );
+                    
+                    if (accounts.length === 0) {
+                        showNotification('Aucun compte Deriv trouvé', 'error');
+                        return;
+                    }
+                    
+                    // Afficher les comptes
+                    displayAccounts();
+                    
+                    showNotification(`${accounts.length} comptes trouvés`, 'success');
+                })
+                .catch(error => {
+                    console.error('Erreur:', error);
+                    showNotification(`Erreur: ${error.message}`, 'error');
+                });
+        }
+        
+        function displayAccounts() {
+            accountsList.innerHTML = '';
+            
+            accounts.forEach((account, index) => {
+                const accountCard = document.createElement('div');
+                accountCard.className = 'account-card';
+                accountCard.dataset.index = index;
+                
+                const accountType = account.account_type === 'demo' ? 'Démo' : 'Réel';
+                const accountIcon = account.account_type === 'demo' ? 'fas fa-coins' : 'fas fa-dollar-sign';
+                const accountColor = account.account_type === 'demo' ? 'var(--warning)' : 'var(--success)';
+                
+                accountCard.innerHTML = `
+                    <div class="account-header">
+                        <div class="account-type">
+                            <i class="${accountIcon}" style="color: ${accountColor}"></i>
+                            ${accountType}
+                        </div>
+                        <div class="account-balance">$${parseFloat(account.balance).toFixed(2)}</div>
+                    </div>
+                    <div class="account-details">
+                        <div>ID: ${account.loginid}</div>
+                        <div>Devise: ${account.currency || 'USD'}</div>
+                        ${account.email ? `<div>Email: ${account.email}</div>` : ''}
+                    </div>
+                `;
+                
+                accountCard.addEventListener('click', () => {
+                    // Supprimer la classe selected de toutes les cartes
+                    document.querySelectorAll('.account-card').forEach(card => {
+                        card.classList.remove('selected');
+                    });
+                    
+                    // Ajouter la classe selected à la carte cliquée
+                    accountCard.classList.add('selected');
+                    
+                    // Mettre à jour le compte sélectionné
+                    selectedAccount = account;
+                    
+                    // Mettre à jour les informations de l'utilisateur
+                    updateUserInfo();
+                    
+                    // Mettre à jour le statut de connexion
+                    connectionStatus = 'connected';
+                    updateDebugInfo();
+                    
+                    // Afficher la section API
+                    loginSection.classList.add('hidden');
+                    apiSection.classList.remove('hidden');
+                    tokenForm.classList.add('hidden');
+                    
+                    showNotification(`Compte ${accountType} sélectionné`, 'success');
+                });
+                
+                accountsList.appendChild(accountCard);
+            });
+            
+            // Afficher la section de sélection des comptes
+            accountSelection.classList.remove('hidden');
+        }
+        
+        function testAPIConnection() {
+            addTerminalMessage('request', 'Test de connexion API REST');
+            
+            const url = `https://deriv.binary.com/https://www.binary.com/en/api?action=authorize&authorize=${token}&app_id=${appId}`;
+            
+            fetch(url)
+                .then(response => response.json())
+                .then(data => {
+                    console.log('Réponse API:', data);
+                    
+                    if (data.error) {
+                        addTerminalMessage('error', `Erreur: ${data.error.message}`);
+                        showNotification(`Erreur API: ${data.error.message}`, 'error');
+                    } else {
+                        addTerminalMessage('response', `Autorisation réussie pour ${data.authorize.email}`);
+                        showNotification('Connecté avec succès!', 'success');
+                    }
+                })
+                .catch(error => {
+                    console.error('Erreur:', error);
+                    addTerminalMessage('error', `Erreur de connexion: ${error.message}`);
+                    showNotification(`Erreur de connexion: ${error.message}`, 'error');
+                });
+        }
+        
+        function getMarketData(market) {
+            addTerminalMessage('request', `Obtention des données pour ${market}`);
+            
+            const url = `https://deriv.binary.com/https://www.binary.com/en/api?action=ticks&ticks=${market}&app_id=${appId}`;
+            
+            fetch(url)
+                .then(response => response.json())
+                .then(data => {
+                    console.log('Réponse prix:', data);
+                    
+                    if (data.error) {
+                        addTerminalMessage('error', `Erreur: ${data.error.message}`);
+                        showNotification(`Erreur API: ${data.error.message}`, 'error');
+                    } else {
+                        addTerminalMessage('response', `Données reçues pour ${data.tick.symbol}: ${data.tick.quote}`);
+                        showNotification(`Prix obtenu pour ${market}: ${data.tick.quote}`, 'success');
+                    }
+                })
+                .catch(error => {
+                    console.error('Erreur:', error);
+                    addTerminalMessage('error', `Erreur de connexion: ${error.message}`);
+                    showNotification(`Erreur de connexion: ${error.message}`, 'error');
+                });
         }
     </script>
 </body>
